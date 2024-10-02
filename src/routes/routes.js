@@ -1,4 +1,5 @@
 import { Router } from 'express';
+
 import myLogger from '../middleware/middleware';
 
 const router = Router();
