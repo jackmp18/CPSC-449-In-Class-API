@@ -1,0 +1,17 @@
+{
+  "name": "cpsc-449-in-class-api",
+  "version": "1.0.0",
+  "main": "index.js",
+  "type": "module",
+  "scripts": {
+    "dev": "nodemon src/index.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "description": "",
+  "devDependencies": {
+    "express": "^4.21.0",
+    "nodemon": "^3.1.7"
+  }
+}
