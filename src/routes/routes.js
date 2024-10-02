@@ -6,6 +6,6 @@ const router = Router();
 router.get("/:id")
 router.post("/")
 router.put("/:id")
-router.delete("/:id", deleteSession);
+router.delete("/:id");
 
 export default router;

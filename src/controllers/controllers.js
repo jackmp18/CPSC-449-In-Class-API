@@ -1,16 +1,15 @@
-import { Session } from '../models/models.js';
-
-export const deleteSession = async (req, res) => {
-    const { id } = req.params;
+const deleteHandler = async (req, res) => {
 
     try {
-        const session = await Session.findByIdAndDelete(id);
+        const { id } = req.params;
 
-        if (!session) {
-            return res.status(404).json({ message: "Session not found"});
-        }
-        res.status(200).json({ message: "Session deleted successfully" });
-    } catch {
-        res.status(500).json({ message: "Error deleting session", error });
-    } 
-};
+        const deletedSession = await Session.findByIdAndDelete(id);
+
+        return res.json({message: "Successfully Deleted Session"})
+    } catch (error) {
+        throw new Error("Error Deleting Session")
+    }
+   
+
+
+}
