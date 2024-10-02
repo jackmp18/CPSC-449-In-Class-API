@@ -1,19 +1,18 @@
-import {Session} from '../models/models';
+import { Session } from '../models/index.js';
 
 const getHandler = async (req, res) => {
     try {
         const { id } = req.params;
-        const session = await Session.findById(id).exec();
-        const now = new Date.now();
+        const session = await Session.findOne({id: id}).exec();
 
         return res.json({
             session: {
                 id: session.id, 
                 isActive: session.isActive
-            },
-            timestamp: now
+            }
         })
     } catch (error) {
+        console.log(error);
         throw new Error("Error Getting Session")
     }
 }
@@ -21,10 +20,16 @@ const getHandler = async (req, res) => {
 const postHandler = async (req, res) => {
     try {
         const {id, isActive} = req.body;
-        await Session.create({id, isActive});
+
+        const newSession = new Session({
+            id, 
+            isActive
+        })
+        newSession.save();
 
         res.json({ message: "New Session Created"});
     } catch (error) {
+        console.log(error);
         throw new Error("Error Creating New Session")
     }
 }
@@ -32,12 +37,14 @@ const postHandler = async (req, res) => {
 const updateHandler = async (req, res) => {
     try {
         const { id } = req.params;
-        const newSession = await Session.findByIdAndUpdate(id, { $set: { isActive: false}});
+        const { isActive } = req.body; 
+        const newSession = await Session.findOneAndUpdate({id: id}, { $set: { isActive: isActive}});
 
         res.json({
             message: "Updated Successfully",
         })
     } catch (error) {
+        console.log(error);
         throw new Error("Error Updating Session")
     }
 }
@@ -46,10 +53,11 @@ const deleteHandler = async (req, res) => {
     try {
         const { id } = req.params;
 
-        const deletedSession = await Session.findByIdAndDelete(id);
+        const deletedSession = await Session.findOneAndDelete({id: id});
 
         return res.json({message: "Successfully Deleted Session"})
     } catch (error) {
+        console.log(error);
         throw new Error("Error Deleting Session")
     }
 }

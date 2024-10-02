@@ -1,6 +1,6 @@
-import mongoose from "mongoose";
+import mongoose, { Schema } from "mongoose";
 
-const sessionSchema = mongoose.Schema({
+const sessionSchema = new Schema({
     id: String, 
     isActive: Boolean,
 })
