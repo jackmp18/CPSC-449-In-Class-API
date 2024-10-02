@@ -1,11 +1,12 @@
 import { Router } from 'express';
-import { deleteSession } from '../controllers/controllers.js';
+
+import myLogger from '../middleware/middleware';
 
 const router = Router();
 
-router.get("/:id")
-router.post("/")
-router.put("/:id")
-router.delete("/:id");
+router.get("/:id", myLogger);
+router.post("/", myLogger);
+router.put("/:id", myLogger);
+router.delete("/:id", myLogger);
 
 export default router;
